@@ -1,1 +1,21 @@
 data/ctrate_train_combined.csv
+# Large output files
+WP2/embeddings_*.npy
+WP2/df_wp2_*.csv
+
+# Old notebooks
+WP2_18Clusters.ipynb
+WP2_Annotator_Style_Analysis.ipynb
+wp2_annotator_clustering.ipynb.ipynb
+
+# Archive
+archive/
+# Old WP2 files
+WP2/maskierungsrate.png
+WP2/stil_profile_wp2_v4.txt
+WP2/wp2_2_neuer_ansatz.ipynb
+WP2/wp2_v4_*.png
+WP2/wp2_v4_zeitstrahl_*.png
+WP2/wp2_v4_zeitverlauf.png
+WP2/Archive/
+WP2/.ipynb_checkpoints/

@@ -1,0 +1,109 @@
+WP2 - Annotator Style Profiles
+============================================================
+
+Method: Trachea phrase detection (Stage 1) + MedBERT sub-clustering (Stage 2)
+Total reports: 24113
+Total styles:  17
+
+Style  0 (n= 1012,   4.2%)
+  Description:  cto | sub-1
+  Mean length:  252.8 words
+  MATTR:        0.738
+  Top-5 terms:  observed, normal, detected, calibration, lung
+
+Style  1 (n=  845,   3.5%)
+  Description:  cto | sub-2
+  Mean length:  236.7 words
+  MATTR:        0.739
+  Top-5 terms:  observed, normal, detected, calibration, lung
+
+Style  2 (n=  502,   2.1%)
+  Description:  midline | sub-1
+  Mean length:  232.4 words
+  MATTR:        0.774
+  Top-5 terms:  observed, detected, normal, lung, thickening
+
+Style  3 (n=  534,   2.2%)
+  Description:  midline | sub-2
+  Mean length:  222.2 words
+  MATTR:        0.776
+  Top-5 terms:  observed, detected, normal, lung, thickening
+
+Style  4 (n=  633,   2.6%)
+  Description:  no_trachea | sub-1
+  Mean length:  121.5 words
+  MATTR:        0.753
+  Top-5 terms:  observed, detected, lung, parenchyma, structures
+
+Style  5 (n=  655,   2.7%)
+  Description:  no_trachea | sub-2
+  Mean length:  126.2 words
+  MATTR:        0.750
+  Top-5 terms:  observed, detected, lung, parenchyma, structures
+
+Style  6 (n= 3334,  13.8%)
+  Description:  open_and | sub-1
+  Mean length:  221.9 words
+  MATTR:        0.754
+  Top-5 terms:  observed, detected, normal, main, structures
+
+Style  7 (n= 2598,  10.8%)
+  Description:  open_and | sub-2
+  Mean length:  218.0 words
+  MATTR:        0.754
+  Top-5 terms:  detected, observed, normal, main, sections
+
+Style  8 (n= 4890,  20.3%)
+  Description:  open_comma | sub-1
+  Mean length:  182.9 words
+  MATTR:        0.765
+  Top-5 terms:  detected, observed, normal, lung, structures
+
+Style  9 (n= 3711,  15.4%)
+  Description:  open_comma | sub-2
+  Mean length:  180.3 words
+  MATTR:        0.766
+  Top-5 terms:  detected, observed, normal, lung, structures
+
+Style 10 (n= 1318,   5.5%)
+  Description:  open_lumen | sub-1
+  Mean length:  209.0 words
+  MATTR:        0.736
+  Top-5 terms:  detected, observed, lung, main, structures
+
+Style 11 (n= 1146,   4.8%)
+  Description:  open_lumen | sub-2
+  Mean length:  200.5 words
+  MATTR:        0.736
+  Top-5 terms:  detected, observed, main, lung, structures
+
+Style 12 (n=  715,   3.0%)
+  Description:  open_main | sub-1
+  Mean length:  135.4 words
+  MATTR:        0.732
+  Top-5 terms:  detected, observed, lung, upper, structures
+
+Style 13 (n=  445,   1.8%)
+  Description:  open_main | sub-2
+  Mean length:  139.9 words
+  MATTR:        0.732
+  Top-5 terms:  detected, observed, lung, upper, structures
+
+Style 14 (n=  796,   3.3%)
+  Description:  open_main | sub-3
+  Mean length:  140.4 words
+  MATTR:        0.730
+  Top-5 terms:  detected, observed, lung, upper, structures
+
+Style 15 (n=  474,   2.0%)
+  Description:  other | sub-1
+  Mean length:  214.7 words
+  MATTR:        0.749
+  Top-5 terms:  observed, lung, detected, upper, right
+
+Style 16 (n=  505,   2.1%)
+  Description:  other | sub-2
+  Mean length:  233.7 words
+  MATTR:        0.743
+  Top-5 terms:  observed, lung, detected, right, lobe
+
