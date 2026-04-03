@@ -1,0 +1,87 @@
+{
+  "ground_glass_opacity": [
+    "ground-glass opacity",
+    "ground glass opacity",
+    "ground-glass",
+    "ground glass",
+    "gg opacity",
+    "ggo"
+  ],
+  "lung_opacity": [
+    "infiltrate",
+    "infiltration",
+    "infiltrates",
+    "infiltrations",
+    "infiltrating",
+    "infiltrated"
+  ],
+  "consolidation": [
+    "consolidations"
+  ],
+  "consolidative": [
+    "consolidating",
+    "consolidated"
+  ],
+  "fibrosis": [
+    "sequela",
+    "sequelae"
+  ],
+  "fibrotic": [
+    "fibrotic changes",
+    "fibrotic sequelae"
+  ],
+  "atelectasis": [
+    "subsegmental atelectasis",
+    "linear atelectasis",
+    "passive atelectasis",
+    "compressive atelectasis",
+    "discoid atelectasis",
+    "atelectases"
+  ],
+  "atelectatic": [
+    "atelectatic changes"
+  ],
+  "emphysema": [
+    "panlobular emphysema",
+    "paraseptal emphysema",
+    "centrilobular emphysema",
+    "bullous emphysema"
+  ],
+  "emphysematous": [
+    "emphysematous changes",
+    "emphysematous bullae"
+  ],
+  "calcification": [
+    "calcifications"
+  ],
+  "calcific": [
+    "calcified",
+    "calcific changes"
+  ],
+  "pleural_effusion": [
+    "pleural fluid",
+    "pleural collection"
+  ],
+  "pericardial_effusion": [
+    "pericardial fluid"
+  ],
+  "lymphadenopathy": [
+    "lap",
+    "lymph node enlargement",
+    "pathological lymph nodes"
+  ],
+  "bronchiectasis": [
+    "cylindrical bronchiectasis",
+    "tubular bronchiectasis",
+    "saccular bronchiectasis"
+  ],
+  "septal_thickening": [
+    "interlobular septal thickening",
+    "septal thickening",
+    "interlobular thickening"
+  ],
+  "mosaic_attenuation": [
+    "mosaic pattern",
+    "mosaic appearance"
+  ]
+}

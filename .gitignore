@@ -19,3 +19,10 @@ WP2/wp2_v4_zeitstrahl_*.png
 WP2/wp2_v4_zeitverlauf.png
 WP2/Archive/
 WP2/.ipynb_checkpoints/
+# WP3 large files
+WP3/*.model
+WP3/*.npy
+WP3/df_wp3*.csv
+
+# data folder
+data/
