@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "created": "2026-05-13",
+    "project": "CT-RATE PACS Query Interface",
+    "institution": "FAU Erlangen",
+    "interviews": [
+      {
+        "id": "interview_1",
+        "date": "2026-05",
+        "participant": "Niklas Lackner",
+        "role": "Medizinphysiker / Postdoc",
+        "institution": "UKER"
+      },
+      {
+        "id": "interview_2",
+        "date": "2026-05-13",
+        "participant": "Nikola Milivojevic",
+        "role": "Assistenzarzt",
+        "institution": "UKE"
+      }
+    ],
+    "categories": [
+      "simple_finding",
+      "combined_finding",
+      "demographic_filter",
+      "temporal_filter",
+      "longitudinal",
+      "device_protocol",
+      "research_cohort"
+    ]
+  },
+  "prompts": [
+    {
+      "id": "Q01",
+      "category": "simple_finding",
+      "complexity": "simple",
+      "ambiguity": "low",
+      "source": ["interview_2"],
+      "de": "Zeige mir alle Patienten mit Pleuraerguss.",
+      "en": "Show me all patients with pleural effusion.",
+      "notes": "Einfachste Form einer Befund-Suche. Kein Zeitfilter, keine weiteren Einschränkungen.",
+      "terminology_variants": ["Pleuraerguss", "pleural effusion", "pleural fluid"],
+      "metadata_required": ["Findings_EN"]
+    },
+    {
+      "id": "Q02",
+      "category": "simple_finding",
+      "complexity": "simple",
+      "ambiguity": "medium",
+      "source": ["interview_2"],
+      "de": "Erkenne alle Patienten mit soliden Lungenrundherden bis zu einer Größe von 1 cm.",
+      "en": "Detect all patients with solid pulmonary nodules up to a size of 1 cm.",
+      "notes": "Direkt aus Interview 2. Größenangabe macht die Suche spezifischer. Ambiguität durch verschiedene Bezeichnungen für Rundherd.",
+      "terminology_variants": ["Rundherd", "Nodule", "pulmonary nodule", "lung nodule", "nodular lesion"],
+      "metadata_required": ["Findings_EN"]
+    },
+    {
+      "id": "Q03",
+      "category": "simple_finding",
+      "complexity": "simple",
+      "ambiguity": "high",
+      "source": ["interview_2"],
+      "de": "Zeige mir alle Patienten mit Milchglastrübung.",
+      "en": "Show me all patients with ground glass opacity.",
+      "notes": "Hohe Ambiguität da Milchglastrübung eine Unterform des Infiltrates ist. Synonyme: ground glass opacity, GGO (selten genutzt), infiltrate.",
+      "terminology_variants": ["Milchglastrübung", "ground glass opacity", "ground-glass opacity", "GGO", "ground glass"],
+      "metadata_required": ["Findings_EN"]
+    },
+    {
+      "id": "Q04",
+      "category": "combined_finding",
+      "complexity": "medium",
+      "ambiguity": "high",
+      "source": ["interview_2"],
+      "de": "Ich möchte alle Patienten mit randständiger Kontrastmittelaufnahme bei Pleuraerguss sehen.",
+      "en": "I would like to see all patients with peripheral contrast enhancement in pleural effusion.",
+      "notes": "Direkt aus Interview 2. Kombination zweier Befunde. Kann auf Pleuritis, Pleuraempyem oder Pleurakarzinose hinweisen – diese Begriffe sollten nicht synonym verwendet werden.",
+      "terminology_variants": ["Pleuraerguss", "pleural effusion", "randständige Kontrastmittelaufnahme", "peripheral contrast enhancement", "Pleuritis", "Pleuraempyem", "Pleurakarzinose"],
+      "metadata_required": ["Findings_EN", "Impressions_EN"]
+    },
+    {
+      "id": "Q05",
+      "category": "combined_finding",
+      "complexity": "complex",
+      "ambiguity": "high",
+      "source": ["interview_1"],
+      "de": "Gib mir alle dünnschichtigen Thorax-CTs mit weichem Rekonstruktionskern der letzten 7 Jahre. Teile sie in 3 Gruppen auf: unauffällige Befunde, auffällige Befunde, und die auffälligen nochmal in handlungsbedürftig und nicht handlungsbedürftig.",
+      "en": "Please retrieve all thorax patients from the last 7 years which have thin-slice thickness with a soft reconstruction kernel and already classify them into 3 groups. One group that is not abnormal, and one abnormal one. Group the abnormal in actionable and non-actionable.",
+      "notes": "Direkt aus Interview 1. Sehr detaillierter Prompt mit automatischer Klassifikation. Erfordert Zugang zu technischen Metadaten (Schichtdicke, Rekonstruktionskernel).",
+      "terminology_variants": ["dünnschichtig", "thin-slice", "weicher Kern", "soft reconstruction kernel", "Thorax-CT"],
+      "metadata_required": ["Findings_EN", "Impressions_EN", "SliceThickness", "ConvolutionKernel", "SeriesDescription", "StudyDate"]
+    },
+    {
+      "id": "Q06",
+      "category": "demographic_filter",
+      "complexity": "simple",
+      "ambiguity": "low",
+      "source": ["interview_1", "interview_2"],
+      "de": "Zeige mir alle CT-Untersuchungen von Patienten über 70 Jahren.",
+      "en": "Show me all CT scans from patients older than 70 years.",
+      "notes": "Demographischer Filter. Aus beiden Interviews als relevant genannt. Alter ist wichtiger Risikofaktor.",
+      "terminology_variants": [],
+      "metadata_required": ["PatientAge"]
+    },
+    {
+      "id": "Q07",
+      "category": "demographic_filter",
+      "complexity": "medium",
+      "ambiguity": "low",
+      "source": ["interview_2"],
+      "de": "Finde alle männlichen Patienten über 60 mit soliden Rundherden.",
+      "en": "Find all male patients older than 60 with solid pulmonary nodules.",
+      "notes": "Kombination aus demographischem Filter und Befund-Suche. Alter und Geschlecht als Risikofaktoren für Bronchialkarzinom.",
+      "terminology_variants": ["Rundherd", "pulmonary nodule", "solid nodule"],
+      "metadata_required": ["PatientAge", "PatientSex", "Findings_EN"]
+    },
+    {
+      "id": "Q08",
+      "category": "temporal_filter",
+      "complexity": "simple",
+      "ambiguity": "low",
+      "source": ["interview_1", "interview_2"],
+      "de": "Zeige mir alle Thorax-CTs mit Pleuraerguss aus den letzten 6 Monaten.",
+      "en": "Show me all chest CTs with pleural effusion from the last 6 months.",
+      "notes": "Zeitfilter kombiniert mit Befund-Suche. Standardmäßiger Query-Typ aus beiden Interviews.",
+      "terminology_variants": ["Pleuraerguss", "pleural effusion"],
+      "metadata_required": ["StudyDate", "Findings_EN"]
+    },
+    {
+      "id": "Q09",
+      "category": "temporal_filter",
+      "complexity": "medium",
+      "ambiguity": "low",
+      "source": ["interview_2"],
+      "de": "Zeige mir alle CT-Untersuchungen mit Covid-19 Befunden zwischen 2020 und 2021.",
+      "en": "Show me all CT scans with Covid-19 findings between 2020 and 2021.",
+      "notes": "Zeitraum-spezifische Suche. Covid-Periode als konkretes Beispiel.",
+      "terminology_variants": ["Covid-19", "Covid", "SARS-CoV-2", "Covid pneumonia"],
+      "metadata_required": ["StudyDate", "Findings_EN"]
+    },
+    {
+      "id": "Q10",
+      "category": "longitudinal",
+      "complexity": "complex",
+      "ambiguity": "medium",
+      "source": ["interview_1", "interview_2"],
+      "de": "Zeige mir alle Follow-up CTs eines Patienten, bei denen sich der Befund im Verlauf verändert hat.",
+      "en": "Show me all follow-up CTs of a patient where the finding has changed over time.",
+      "notes": "Verlaufsbeurteilung. Aus beiden Interviews als wichtig genannt. Erfordert Verknüpfung mehrerer Untersuchungen desselben Patienten.",
+      "terminology_variants": ["Verlauf", "follow-up", "Progression", "Regression"],
+      "metadata_required": ["PatientID", "StudyDate", "Findings_EN", "Impressions_EN"]
+    },
+    {
+      "id": "Q11",
+      "category": "longitudinal",
+      "complexity": "complex",
+      "ambiguity": "low",
+      "source": ["interview_2"],
+      "de": "Identifiziere alle Patienten mit soliden Rundherden bis 0,8 mm und verfolge deren Entwicklung über die Zeit.",
+      "en": "Identify all patients with solid pulmonary nodules up to 0.8 mm and track their development over time.",
+      "notes": "Direkt aus Interview 2, Lungenkrebsscreening Kontext. Erfordert longitudinale Verknüpfung.",
+      "terminology_variants": ["Rundherd", "pulmonary nodule", "solid nodule"],
+      "metadata_required": ["PatientID", "StudyDate", "Findings_EN"]
+    },
+    {
+      "id": "Q12",
+      "category": "device_protocol",
+      "complexity": "medium",
+      "ambiguity": "low",
+      "source": ["interview_1"],
+      "de": "Gib mir alle Ablationspatienten der letzten 2 Jahre am Gerät XCite.",
+      "en": "Give me the CT data from our CT Scanner XCite from ablation patients in the last 2 years.",
+      "notes": "Direkt aus Interview 1. Gerätespezifische Suche. Erfordert Zugang zu technischen Metadaten.",
+      "terminology_variants": ["Ablation", "Cryoablation", "Mikrowellenablation", "ablation"],
+      "metadata_required": ["ManufacturerModelName", "StudyDate", "Findings_EN"]
+    },
+    {
+      "id": "Q13",
+      "category": "device_protocol",
+      "complexity": "complex",
+      "ambiguity": "medium",
+      "source": ["interview_1"],
+      "de": "Finde alle Cryoablations-Patienten. Schlage auch verwandte Verfahren wie Mikrowellenablationen vor.",
+      "en": "Find all cryoablation patients. Also suggest related procedures such as microwave ablations.",
+      "notes": "Aus Interview 1, Beispiel für LLM-basierte Differenzierung. Das System soll zwischen Ablationstypen differenzieren und nachfragen.",
+      "terminology_variants": ["Cryoablation", "Mikrowellenablation", "Ablation", "cryoablation", "microwave ablation"],
+      "metadata_required": ["Findings_EN", "Impressions_EN"]
+    },
+    {
+      "id": "Q14",
+      "category": "research_cohort",
+      "complexity": "complex",
+      "ambiguity": "medium",
+      "source": ["interview_2"],
+      "de": "Finde alle Kardio-CT Patienten ohne vorhandenen Stent oder Bypass.",
+      "en": "Find all cardiac CT patients without an existing stent or bypass.",
+      "notes": "Direkt aus Interview 2. Ausschlusskriterium als Filter. Klinische Information häufig unvollständig.",
+      "terminology_variants": ["Stent", "Bypass", "KardioCT", "cardiac CT"],
+      "metadata_required": ["Findings_EN", "Impressions_EN", "ClinicalInformation_EN"]
+    },
+    {
+      "id": "Q15",
+      "category": "research_cohort",
+      "complexity": "complex",
+      "ambiguity": "low",
+      "source": ["interview_2"],
+      "de": "Erstelle eine Kohorte von 20-30 Patienten mit randständiger Kontrastmittelaufnahme bei Pleuraerguss für eine Forschungsstudie.",
+      "en": "Create a cohort of 20-30 patients with peripheral contrast enhancement in pleural effusion for a research study.",
+      "notes": "Aus Interview 2. Typische Forschungsanfrage mit definierter Kohortengröße.",
+      "terminology_variants": ["Pleuraerguss", "pleural effusion", "randständige Kontrastmittelaufnahme", "peripheral contrast enhancement"],
+      "metadata_required": ["Findings_EN", "Impressions_EN", "PatientID"]
+    }
+  ]
+}
