@@ -159,7 +159,7 @@
       "source": ["interview_2"],
       "de": "Identifiziere alle Patienten mit soliden Rundherden bis 0,8 mm und verfolge deren Entwicklung über die Zeit.",
       "en": "Identify all patients with solid pulmonary nodules up to 0.8 mm and track their development over time.",
-      "notes": "Direkt aus Interview 2, Lungenkrebsscreening Kontext. Erfordert longitudinale Verknüpfung.",
+      "notes": "Direkt aus Interview 2, Lungenkrebsscreening Kontext. Erfordert longitudinale Verknüpfung. Prüfpunkt: Größenangabe 0,8 mm anhand der Originalinterviewnotizen bestätigen; Einheit und Zahlenwert bislang nicht verifiziert.",
       "terminology_variants": ["Rundherd", "pulmonary nodule", "solid nodule"],
       "metadata_required": ["PatientID", "StudyDate", "Findings_EN"]
     },

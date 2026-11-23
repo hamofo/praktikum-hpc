@@ -22,35 +22,19 @@
     "consolidating",
     "consolidated"
   ],
-  "fibrosis": [
-    "sequela",
-    "sequelae"
-  ],
+  "fibrosis": [],
   "fibrotic": [
     "fibrotic changes",
     "fibrotic sequelae"
   ],
   "atelectasis": [
-    "subsegmental atelectasis",
-    "linear atelectasis",
-    "passive atelectasis",
-    "compressive atelectasis",
-    "discoid atelectasis",
     "atelectases"
   ],
   "atelectatic": [
     "atelectatic changes"
   ],
-  "emphysema": [
-    "panlobular emphysema",
-    "paraseptal emphysema",
-    "centrilobular emphysema",
-    "bullous emphysema"
-  ],
-  "emphysematous": [
-    "emphysematous changes",
-    "emphysematous bullae"
-  ],
+  "emphysema": [],
+  "emphysematous": [],
   "calcification": [
     "calcifications"
   ],
@@ -70,11 +54,8 @@
     "lymph node enlargement",
     "pathological lymph nodes"
   ],
-  "bronchiectasis": [
-    "cylindrical bronchiectasis",
-    "tubular bronchiectasis",
-    "saccular bronchiectasis"
-  ],
+  "bronchiectasis": [],
+  "bronchiectatic": [],
   "septal_thickening": [
     "interlobular septal thickening",
     "septal thickening",
