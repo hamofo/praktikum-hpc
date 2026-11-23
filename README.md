@@ -1,77 +1,55 @@
 # CT-RATE Report Analysis and Data Preparation
 
-This project prepares CT-RATE radiology reports and metadata for future natural-language retrieval experiments. It covers data ingestion, exploratory reporting style analysis, text normalisation, interview-derived query templates, and database export.
+This project prepares the CT-RATE radiology reports and their metadata so they can be used for natural-language retrieval experiments later on. The work covers loading the data, an exploratory look at reporting style, text normalisation, query templates based on two interviews, and a final database export.
 
-An LLM-based retrieval system was not implemented or evaluated.
+The retrieval system itself (LLM-based) is not part of this project and was neither implemented nor evaluated.
 
 ## Work packages
 
-| WP | Notebook | Purpose |
+| WP | Notebook | Content |
 |---|---|---|
-| WP1 | `WP1/wp1_data_ingestion.ipynb` | Load and combine reports, metadata, and abnormality labels; inspect data quality |
-| WP2 | `WP2/wp2_hybrid.ipynb` | Deduplicate reports by study and explore reporting style variation |
-| WP3 | `WP3/wp3_normalisation.ipynb` | Add normalised findings and impressions while preserving the original text |
-| WP4 | `WP4/wp4_prompt_library.ipynb` | Document two interviews and analyse the query template library |
-| WP5 | `WP5/wp5_data_export.ipynb` | Export selected data and summarise results and limitations |
+| WP1 | `WP1/wp1_data_ingestion.ipynb` | Loading and merging reports, metadata and abnormality labels; data quality checks |
+| WP2 | `WP2/wp2_hybrid.ipynb` | Deduplication per study and exploration of reporting styles |
+| WP3 | `WP3/wp3_normalisation.ipynb` | Normalised findings and impressions, original text kept |
+| WP4 | `WP4/wp4_prompt_library.ipynb` | Documentation of two interviews and analysis of the query templates |
+| WP5 | `WP5/wp5_data_export.ipynb` | Export of the selected data, summary of results and limitations |
 
-The WP folders also contain figures and supporting files:
-- WP2: `style_profiles.txt`
-- WP3: `lexical_mappings.json` and `spelling_corrections.json`
-- WP4: `pacs_prompt_library.json`
+Besides the notebooks and figures, some WP folders contain supporting files: `style_profiles.txt` (WP2), `lexical_mappings.json` and `spelling_corrections.json` (WP3), and `pacs_prompt_library.json` (WP4).
 
-## Main results
+## Results
 
-- WP1: 47,119 retained training entries with 66 columns.
-- WP2: 24,113 study-level reports after removing 23,006 duplicate reconstruction entries.
-- WP2: 16 exploratory reporting style groups, based on recurring trachea phrases and BiomedBERT embeddings.
-- WP3: 19 lexical mapping groups and 21 spelling correction rules.
-- WP3: 69.3% of findings and 70.1% of impressions changed beyond lowercasing.
-- WP4: 15 interview-derived query templates across seven categories.
-- WP5: 24,113 rows and 20 columns exported as Parquet and CSV.
+After loading, 47,119 training entries with 66 columns remain (WP1). Many of these are different reconstructions of the same study, so WP2 removes 23,006 duplicates, leaving 24,113 study-level reports. Based on recurring trachea phrases and BiomedBERT embeddings, WP2 identifies 16 exploratory reporting style groups.
 
-The Parquet export occupies approximately 22.2 MiB, compared with 74.8 MiB for the same table in CSV format: a 70.3% reduction.
+For normalisation, WP3 uses 19 lexical mapping groups and 21 spelling correction rules. Apart from lowercasing, this changes 69.3% of the findings and 70.1% of the impressions.
+
+WP4 contains 15 query templates in seven categories, derived from the interviews.
+
+The final export in WP5 has 24,113 rows and 20 columns and is written as both Parquet and CSV. The Parquet file is about 22.2 MiB, the CSV of the same table 74.8 MiB, so Parquet is 70.3% smaller.
 
 ## Data access
 
-The source dataset is available at:
-https://huggingface.co/datasets/ibrahimhamamci/CT-RATE
+The dataset is available on Hugging Face: https://huggingface.co/datasets/ibrahimhamamci/CT-RATE
 
-Access requires a Hugging Face account and compliance with the dataset's access conditions. WP1 reads authentication from the `HF_TOKEN` environment variable. Do not store tokens in notebooks or commit them to Git.
+You need a Hugging Face account and have to accept the dataset's access conditions. WP1 reads the token from the `HF_TOKEN` environment variable; tokens should not end up in the notebooks or in Git.
 
-Generated datasets and model caches are not included in the repository. Running the notebooks creates these files locally.
+Generated datasets and model caches are not part of the repository and are created locally when the notebooks are run.
 
 ## Environment
 
-The notebooks were run with Python 3.10.19 in a Conda environment.
+Python 3.10.19 in a Conda environment. Main packages: `datasets`, `huggingface_hub`, `pandas`, `numpy`, `matplotlib`, `seaborn`, `scikit-learn`, `torch`, `transformers`, `gensim`, `pyarrow` and `ipykernel`.
 
-Main dependencies:
-- `datasets` and `huggingface_hub`
-- `pandas` and `numpy`
-- `matplotlib` and `seaborn`
-- `scikit-learn`
-- `torch` and `transformers`
-- `gensim`
-- `pyarrow`
-- `ipykernel`
-
-WP2 uses the model:
-`microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext`
-
-A CUDA-capable GPU accelerates embedding computation. The notebook also supports CPU execution. Initial runs require network access to download the dataset and pretrained model.
+WP2 uses `microsoft/BiomedNLP-BiomedBERT-base-uncased-abstract-fulltext`. The embeddings are much faster on a CUDA GPU, but the notebook also runs on CPU. The first run needs network access to download the dataset and the model.
 
 ## Running the notebooks
 
-1. Install the dependencies and select the intended Python kernel.
-2. Configure `HF_TOKEN` in your environment.
-3. Run WP1 through WP5 in order.
-4. Use each notebook's own WP folder as its working directory, since paths are relative to that folder.
-5. Keep the supporting JSON files in their existing locations.
+Install the dependencies, select the kernel and set `HF_TOKEN`. Then run WP1 to WP5 in order. Paths are relative to each WP folder, so that folder has to be the working directory. The JSON files should stay where they are.
 
-WP4 loads the existing prompt library; it does not recreate the interview material.
+WP4 only loads the existing prompt library; the interview material is not regenerated.
 
-WP2 caches embeddings together with their matching inputs. The cache is reused only when the recorded model, input texts, report order, and embedding shape match.
+WP2 caches the embeddings together with their inputs. The cache is only reused if model, input texts, report order and embedding shape all match.
 
-Main generated data files:
+Main output files:
+
 - `data/ctrate_train_combined.csv`
 - `WP2/df_wp2_final.csv`
 - `data/ctrate_train_normalised.csv`
@@ -80,22 +58,20 @@ Main generated data files:
 
 ## Export contents and checks
 
-The final export includes identifiers, original and normalised report text, selected demographic and acquisition metadata, and exploratory style-group assignments.
+The export contains identifiers, the original and normalised report text, selected demographic and acquisition metadata, and the style group assignments. The abnormality labels are still in the upstream datasets but were not selected for the final export.
 
-Original report text is retained alongside normalised text. The abnormality labels remain in upstream datasets but are not included in the final selected export.
-
-After reloading, the Parquet export was checked for equality of values, column order, and data types. CSV checks covered dimensions, column order, identifiers, and original and normalised findings and impressions.
+The Parquet file was reloaded and compared with the original table (values, column order, data types). For the CSV, dimensions, column order, identifiers and the original and normalised findings and impressions were checked.
 
 ## Limitations
 
-- The style groups are exploratory and do not identify individual annotators.
-- Clinical content may influence clustering despite masking; embeddings use at most 256 input tokens.
-- Lexical mappings require contextual review. In particular, mapping infiltrate/infiltration variants to `lung_opacity` remains provisional.
-- Change rates do not demonstrate clinical correctness or improved retrieval.
-- The prompt library reflects two interview perspectives and has not been validated as a retrieval benchmark.
-- `SliceThickness` is absent from the loaded tables; `ZSpacing` is not treated as an equivalent substitute.
-- Study-level deduplication retains one reconstruction per study, which limits protocol-specific queries.
-- Retrieval performance and longitudinal query feasibility have not been evaluated.
+- The style groups are exploratory and do not correspond to individual annotators.
+- Clinical content can still influence the clustering despite masking. The embeddings only see the first 256 tokens.
+- The lexical mappings need to be reviewed in context. Mapping infiltrate/infiltration variants to `lung_opacity` in particular is provisional.
+- The change rates say nothing about clinical correctness or better retrieval.
+- The prompt library is based on only two interviews and has not been validated as a retrieval benchmark.
+- `SliceThickness` is missing from the loaded tables. `ZSpacing` was not used as a replacement.
+- Since only one reconstruction per study is kept, protocol-specific queries are limited.
+- Retrieval performance and the feasibility of longitudinal queries were not evaluated.
 
 ## References
 
